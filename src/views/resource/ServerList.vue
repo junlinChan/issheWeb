@@ -97,13 +97,17 @@
               align="center">
       </el-table-column>
       <el-table-column
-              prop="status"
               label="状态"
               align="center">
+          <template slot-scope="scope">
+            <el-tag type=success v-if="scope.row.status === '线上'">线上</el-tag>
+            <el-tag type=danger v-if="scope.row.status === '故障'">故障</el-tag>
+            <el-tag type=info v-if="scope.row.status === '下线'">下线</el-tag>
+          </template>
       </el-table-column>
       <el-table-column
         prop="idc.name"
-        label="所在机房"
+        label="所在位置"
         align="center">
       </el-table-column>
       <el-table-column
@@ -251,7 +255,7 @@ export default {
       searchCabinetList: [{ id: '', name: '所有机柜' }],
       addServerVisible: false,
       changeServerVisible: false,
-      statusList: ['线上', '下线', '测试', '故障', '发布', '维护'],
+      statusList: ['线上', '下线', '故障'],
       servertypeList: ['物理机', '虚拟机', 'Docker'],
       addServerForm: {
         ip: '',
