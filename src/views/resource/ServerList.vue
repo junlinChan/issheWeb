@@ -46,17 +46,17 @@
             <el-form-item label="服务器类型：">
               <span>{{ props.row.model_name }}</span>
             </el-form-item>
-            <el-form-item label="SN：">
-              <span>{{ props.row.sn }}</span>
+            <el-form-item label="操作系统：">
+              <span>{{ props.row.os }}</span>
             </el-form-item>
              <el-form-item label="uuid：">
               <span>{{ props.row.uuid }}</span>
             </el-form-item>
-            <el-form-item label="操作系统：">
-              <span>{{ props.row.os }}</span>
-            </el-form-item>
             <el-form-item label="CPU：">
               <span>{{ props.row.cpu }}</span>
+            </el-form-item>
+            <el-form-item label="CPU使用率：">
+              <span>{{ props.row.cpu_use }}</span>
             </el-form-item>
              <el-form-item label="网卡设备名：">
               <span>{{ props.row.network_name }}</span>
@@ -72,6 +72,9 @@
             </el-form-item>
             <el-form-item label="内存：">
               <span>{{ props.row.mem }}</span>
+            </el-form-item>
+            <el-form-item label="内存使用率：">
+              <span>{{ props.row.mem_use }}</span>
             </el-form-item>
           </el-form>
         </template>
@@ -100,9 +103,9 @@
               label="状态"
               align="center">
           <template slot-scope="scope">
-            <el-tag type=success v-if="scope.row.status === '线上'">线上</el-tag>
-            <el-tag type=danger v-if="scope.row.status === '故障'">故障</el-tag>
-            <el-tag type=info v-if="scope.row.status === '下线'">下线</el-tag>
+            <el-tag type=success v-if="scope.row.status === '在线'">在线</el-tag>
+            <el-tag type=warning v-if="scope.row.status === '异常'">异常</el-tag>
+            <el-tag type=info v-if="scope.row.status === '离线'">离线</el-tag>
           </template>
       </el-table-column>
       <el-table-column
@@ -255,8 +258,8 @@ export default {
       searchCabinetList: [{ id: '', name: '所有机柜' }],
       addServerVisible: false,
       changeServerVisible: false,
-      statusList: ['线上', '下线', '故障'],
-      servertypeList: ['物理机', '虚拟机', 'Docker'],
+      statusList: ['在线', '离线', '异常'],
+      servertypeList: ['物理机', '虚拟机', '云服务器'],
       addServerForm: {
         ip: '',
         username: '',
