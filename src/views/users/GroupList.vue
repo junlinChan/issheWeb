@@ -111,11 +111,6 @@
             align="center">
           </el-table-column>
           <el-table-column
-            prop="ncfgroupuser.title"
-            label="上次登陆时间"
-            align="center">
-          </el-table-column>
-          <el-table-column
             prop=""
             label="操作"
             align="center">
