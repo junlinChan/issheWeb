@@ -110,7 +110,12 @@
       </el-table-column>
       <el-table-column
         prop="idc.name"
-        label="所在位置"
+        label="所在机房"
+        align="center">
+      </el-table-column>
+      <el-table-column
+        prop="cabinet.name"
+        label="所在机柜"
         align="center">
       </el-table-column>
       <el-table-column
@@ -119,7 +124,28 @@
             <template slot-scope="scope">
            <el-button
           size="mini"
+          v-if="scope.row.status === '离线'"
+          disabled=true
           @click="rtty(scope.row)">连接</el-button>
+          <el-button
+          size="mini"
+          v-if="scope.row.status === '异常' || scope.row.status === '在线'"
+          @click="rtty(scope.row)">连接</el-button>
+          </template>
+      </el-table-column>
+      <el-table-column
+              label="系统状态"
+              align="center">
+            <template slot-scope="scope">
+           <el-button
+          size="mini"
+          v-if="scope.row.status === '离线'"
+          disabled=true
+          @click="vmstats(scope.row)">查看</el-button>
+          <el-button
+          size="mini"
+          v-if="scope.row.status === '异常' || scope.row.status === '在线'"
+          @click="vmstats(scope.row)">查看</el-button>
           </template>
       </el-table-column>
       <el-table-column
@@ -369,8 +395,9 @@ export default {
       if (this.$refs['changeServerForm'] !== undefined) {
         this.$refs['changeServerForm'].resetFields()
       }
-      const { id, hostname, ip, status, remark, cabinet } = row
+      const { id, hostname, ip, status, remark } = row
       const { idc } = { idc: row.idc.id }
+      const { cabinet } = { cabinet: row.cabinet.id }
       this.changeServerForm = { id, hostname, ip, status, remark, idc, cabinet }
       this.changeServerVisible = true
     },
@@ -405,6 +432,9 @@ export default {
     },
     rtty(row) {
       window.open('http://39.97.118.148:5912/#/?id=' + row.network_mac)
+    },
+    vmstats(row) {
+      window.open('http://' + row.ip + ':9231')
     },
     submitForm() {
       this.$refs['addServerForm'].validate((valid) => {

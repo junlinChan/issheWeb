@@ -16,9 +16,6 @@
             <el-form-item label="机柜名称" prop="name">
                 <el-input v-model="addForm.name" maxlength="20" placeholder="请输入名称"></el-input>
             </el-form-item>
-            <el-form-item label="电源功率" prop="power_supply">
-                <el-input v-model="addForm.power_supply" maxlength="5" placeholder="请输入电源功率"></el-input>
-            </el-form-item>
             <el-form-item label="所在机房" prop="idc">
               <el-select class="select" v-model="addForm.idc" placeholder="所在机房">
                 <el-option
@@ -41,9 +38,6 @@
         <el-form ref="editForm" :model="editForm" label-width="80px" :rules="addRule">
             <el-form-item label="机柜名称" prop="name">
                 <el-input v-model="editForm.name" maxlength="20" placeholder="请输入名称"></el-input>
-            </el-form-item>
-            <el-form-item label="电源功率" prop="power_supply">
-                <el-input v-model="editForm.power_supply" maxlength="5" placeholder="请输入电源功率"></el-input>
             </el-form-item>
             <el-form-item label="所在机房" prop="idc">
               <el-select class="select" v-model="editForm.idc" placeholder="所在机房">
@@ -72,11 +66,6 @@
         <el-table-column
                 prop="name"
                 label="机柜名称"
-                align="center">
-        </el-table-column>
-        <el-table-column
-                prop="power_supply"
-                label="电源功率"
                 align="center">
         </el-table-column>
         <el-table-column
@@ -137,7 +126,6 @@ export default {
       editForm: {},
       addForm: {
         name: '',
-        power_supply: '',
         idc: ''
       },
       addRule: {
